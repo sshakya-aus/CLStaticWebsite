@@ -1,0 +1,35 @@
+<footer class="container">
+    <hr />
+    <h2>Footer Container</h2>
+    <p>©2025 Clinical labs Pty Ltd.</p>
+    <br/>
+
+    <h3>Social Links</h3>
+    <a href="{{footerMenu[0].fields.facebookPageUrl}}">Facebook</a>
+    <a href="{{footerMenu[0].fields.linkedInPageUrl}}">LinkedIn</a>
+
+    <h3>Footer Menu</h3>
+    <!--{{footerMenu | dump}} -->
+    <ul>
+        {% for item in footerMenu[0].fields.footerMenuItems %}
+            {% set href = '#' %}
+            {% set target = '' %}
+
+            {% if item.fields.externalUrl %}
+                {% set href = item.fields.externalUrl %}
+            {% elseif item.fields.internalPage and item.fields.internalPage.fields.slug %}
+                {% set href = '/' + item.fields.internalPage.fields.slug + '/' %}
+            {% endif %}
+
+            {% if item.fields.openInNewTab %}
+                {% set target = 'target="_blank"' %}
+            {% endif %}
+
+            <li>
+                <a href="{{ href }}" {{ target | safe }}>
+                    {{ item.fields.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</footer>

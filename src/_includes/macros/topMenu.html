@@ -1,0 +1,24 @@
+{% macro renderMenuItem(item) %}
+    <ul>
+        {% for item in topMenu %}
+        {% set href = '#' %}
+        {% set target = '' %}
+
+        {% if item.fields.externalUrl %}
+            {% set href = item.fields.externalUrl %}
+        {% elseif item.fields.internalPage and item.fields.internalPage.fields.slug %}
+            {% set href = '/' + item.fields.internalPage.fields.slug + '/' %}
+        {% endif %}
+
+        {% if item.fields.openInNewTab %}
+            {% set target = 'target="_blank"' %}
+        {% endif %}
+
+        <li>
+            <a href="{{ href }}" {{ target | safe }}>
+                {{ item.fields.title }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endmacro %}
