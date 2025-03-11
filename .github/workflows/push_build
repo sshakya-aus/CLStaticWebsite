@@ -37,6 +37,6 @@ jobs:
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: _site
-          ssh-key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          cname: gallery.contentful.com
+          branch: gh-pages  # The branch where GitHub Pages is hosted
+          folder: _site      # The output directory of 11ty
+          clean: true
